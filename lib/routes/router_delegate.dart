@@ -1,3 +1,4 @@
+import 'package:declarative_navigation/screen/form_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../model/quote.dart';
@@ -12,6 +13,7 @@ class MyRouterDelegate extends RouterDelegate
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 
   String? selectedQuote;
+  bool isForm = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,11 @@ class MyRouterDelegate extends RouterDelegate
                 selectedQuote = quoteId;
                 notifyListeners();
               },
+
+              toFormScreen: (){
+                isForm = true;
+                notifyListeners();
+              },
             ),
           ),
           if (selectedQuote != null)
@@ -35,6 +42,16 @@ class MyRouterDelegate extends RouterDelegate
                 quoteId: selectedQuote!,
               ),
             ),
+          if (isForm)
+            MaterialPage(
+              key: const ValueKey("FormScreen"),
+              child: FormScreen(
+                onSend: () {
+                  isForm = false;
+                  notifyListeners();
+                },
+              ),
+            )
         ],
         onPopPage: (route, result) {
           final didPop = route.didPop(result);
@@ -43,6 +60,7 @@ class MyRouterDelegate extends RouterDelegate
           }
 
           selectedQuote = null;
+          isForm = false;
           notifyListeners();
 
           return true;
