@@ -72,7 +72,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                   },
                 ),
                 const SizedBox(height: 8),
-                context.watch<AuthProvider>().isLoadingLogin
+                context.watch<AuthProvider>().isLoadingRegister
                     ? const Center(child: CircularProgressIndicator())
                     : ElevatedButton(
                         onPressed: () async {
