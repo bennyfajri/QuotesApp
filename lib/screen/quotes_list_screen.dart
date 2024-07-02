@@ -1,4 +1,3 @@
-
 import 'package:declarative_navigation/routes/page_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,8 +32,7 @@ class QuotesListScreen extends StatelessWidget {
               final pageManager = context.read<PageManager>();
 
               toFormScreen();
-              final dataString =
-                  await pageManager.waitForResult();
+              final dataString = await pageManager.waitForResult();
 
               scaffoldMessagerState.showSnackBar(
                 SnackBar(content: Text("My name is $dataString")),
@@ -44,15 +42,15 @@ class QuotesListScreen extends StatelessWidget {
               Icons.quiz,
             ),
           ),
-          IconButton(onPressed: () async {
-            final authRead = context.read<AuthProvider>();
-            final result = await authRead.logout();
-            if (result) onLogout();
-          }, icon: authWatch.isLoadingLogout
-              ? const CircularProgressIndicator(
-            color: Colors.white,
-          )
-              : const Icon(Icons.logout)),
+          IconButton(
+              onPressed: () async {
+                final authRead = context.read<AuthProvider>();
+                final result = await authRead.logout();
+                if (result) onLogout();
+              },
+              icon: authWatch.isLoadingLogout
+                  ? const CircularProgressIndicator()
+                  : const Icon(Icons.logout)),
         ],
       ),
       body: ListView(
@@ -62,7 +60,7 @@ class QuotesListScreen extends StatelessWidget {
               title: Text(quote.author),
               subtitle: Text(quote.quote),
               isThreeLine: true,
-              onTap:() => onTapped(quote.id),
+              onTap: () => onTapped(quote.id),
             )
         ],
       ),

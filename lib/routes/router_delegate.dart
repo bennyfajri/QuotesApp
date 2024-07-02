@@ -135,7 +135,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
                 notifyListeners();
               },
               onLogin: () {
-                isLoggedIn = true;
+                isRegister = false;
                 notifyListeners();
               },
             ),
